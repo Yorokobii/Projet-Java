@@ -17,7 +17,7 @@ On devra pouvoir choisir le nombre d'itérations, zoomer ou dézoomer à la sour
 
 public class Mandelbrot {
     public static void main(String [] args){
-
+        Window w = new Window("Mandelbrot Project");
 
     }
 

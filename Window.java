@@ -10,7 +10,26 @@ IHM codée aussi ici :
 */
 
 //* Liste imports :
+import javax.swing.*;
 
-public class Window /* extends JFrame implements ActionListener*/ {
+public class Window extends JFrame /* implements ActionListener*/ {
+    public PaintArea area;
+
+    public Window(String s){
+        super(s);   //Appel du constructeur JFrame en y mettant le nom de la fenêtre
+        setSize(640, 520);  // Taille de la fenêtre à son lancement
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermeture de la fenêtre
+        setResizable(true); // Fenêtre dont on peut faire varier la taille
+        setLocationRelativeTo(null);  // Fenêtre initialement posée au centre de l'écran
+        setAlwaysOnTop(false);  // La fenêtre n'as pas toujours le focus
+
+        area = new PaintArea();
+        setContentPane(area);
+
+        setVisible(true); // Affiche la fenêtre
+    }
+
+
+
 
 }
