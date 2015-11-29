@@ -52,8 +52,10 @@ public class PaintArea extends JPanel{
 
                 do{
                     double tmp = z_r;
+
                     z_r = z_r*z_r - z_i*z_i +c_r;
                     z_i = 2*z_i*tmp +c_i;
+
                     ++i;
                 }while(z_r*z_r + z_i*z_i < 4 && i < iter_max);
 
