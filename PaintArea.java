@@ -15,9 +15,11 @@ public class PaintArea extends JPanel{
     public void paint(Graphics g){ mandelbrot(g); }
 
     public void mandelbrot(Graphics g){
+        Mandelbrot fractale = new Mandelbrot();
+        fractale.getxOne();
 
         //la couleur
-        g.setColor(Color.red);
+        g.setColor(Color.blue);
 
         //les bornes de la fractale
         double x1=-2.1;
@@ -31,7 +33,7 @@ public class PaintArea extends JPanel{
         double hauteur=(y2-y1)*zoom;
 
         //le nombre d'itération
-        int iter_max=100;
+        int iter_max=150;
 
 
         double z_r,z_i,c_r,c_i;
@@ -52,7 +54,7 @@ public class PaintArea extends JPanel{
                     double tmp = z_r;
                     z_r = z_r*z_r - z_i*z_i +c_r;
                     z_i = 2*z_i*tmp +c_i;
-                    i = i+1;
+                    ++i;
                 }while(z_r*z_r + z_i*z_i < 4 && i < iter_max);
 
                 //allumer pixel
@@ -63,6 +65,7 @@ public class PaintArea extends JPanel{
             }
         }
     }
+
 
 
 }
