@@ -17,6 +17,8 @@ public class PaintArea extends JPanel{
     public void mandelbrot(Graphics g){
         Mandelbrot fractale = new Mandelbrot();
         fractale.getxOne();
+        
+        System.out.println("mandelbrot dessin: "+ fractale.getiNumber());
 
         //la couleur
         g.setColor(Color.blue);
