@@ -41,7 +41,7 @@ public class Mandelbrot {
 // ________________________
 
     private double zoom; // à définir selon la molette
-    private double iterationNumber; // Nombre d'itération
+    private static double iterationNumber; // Nombre d'itération
 
     /* Variable pour récupérer la position de la souris à l'écran */
     /* Récupérer la taille de la fenêtre */
@@ -60,14 +60,12 @@ public class Mandelbrot {
     public final double getxTwo() { return xTwo; }
     public final double getyTwo() { return yTwo; }
 
-
-
     /* ->>> En construction
         public double getZoom()
     */
 
-    public double getiNumber() { return iterationNumber; }
-    public void setiNumber(double i) { iterationNumber = i; }
+    public static double getiNumber() { return iterationNumber; }
+    public static void setiNumber(double i) { iterationNumber = i; }
 
     // Accesseurs et Mutateurs hauteur et largeur de dessin
     public double getW() { return width; }
