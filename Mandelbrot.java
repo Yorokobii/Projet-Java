@@ -24,8 +24,8 @@ public class Mandelbrot {
     private final double yOne = -1.2;
     private final double yTwo = 1.2;
 
-    private double width; // largeur de dessin
-    private double height; // hauteur de dessin
+    private double width = 0; // largeur de dessin
+    private double height = 0; // hauteur de dessin
 
 
     /** Il s'agit ici d'écrire en Java cZn+1 = Zn² + cZ0 = 0
@@ -33,11 +33,11 @@ public class Mandelbrot {
         On sépare la partie imaginaire de z et c, nous avons donc deux variables pour z et c
     */
 
-    private double zReal; // zr = zr² - zi²
-    private double zImg; // zi = 2*zr*zi + ci
+    private double zReal = 0; // zr = zr² - zi²
+    private double zImg = 0; // zi = 2*zr*zi + ci
 
-    private double cReal;
-    private double cImg;
+    private double cReal = 0;
+    private double cImg = 0;
 // ________________________
 
     private double zoom; // à définir selon la molette
@@ -46,26 +46,35 @@ public class Mandelbrot {
     /* Variable pour récupérer la position de la souris à l'écran */
     /* Récupérer la taille de la fenêtre */
 
-    public Mandelbrot() {
-        width = xTwo - xOne;
-        height = yOne - yTwo;
+    public Mandelbrot() { zoom = 200; width = xTwo - xOne; height = yTwo - xTwo; }
 
-        zReal = 0; zImg = 0;
-        cReal = 0; cImg = 0;
-    }
+
 
     // Getter des bornes de la fractale
-    public final double getxOne() { return xOne; }
-    public final double getyOne() { return yOne; }
-    public final double getxTwo() { return xTwo; }
-    public final double getyTwo() { return yTwo; }
+    public double getxOne() { return xOne; }
+    public double getyOne() { return yOne; }
+    public double getxTwo() { return xTwo; }
+    public double getyTwo() { return yTwo; }
+
+    public double gzr() { return zReal; }
+    public double gzi() { return zImg; }
+    public double gcr() { return cReal; }
+    public double gci() { return cImg; }
+
+    public void szr(double zr) { zReal = zr; }
+    public void szi(double zi) { zImg = zi; }
+    public void sci(double ci) { cImg = ci; }
+    public void scr(double cr) { cReal = cr; }
+
+    public double gZoom() { return zoom; }
+    public void sZoom(double z) { zoom = z; }
 
     /* ->>> En construction
         public double getZoom()
     */
 
-    public static double getiNumber() { return iterationNumber; }
-    public static void setiNumber(double i) { iterationNumber = i; }
+    public double getiNumber() { return iterationNumber; }
+    public void setiNumber(double i) { iterationNumber = i; }
 
     // Accesseurs et Mutateurs hauteur et largeur de dessin
     public double getW() { return width; }

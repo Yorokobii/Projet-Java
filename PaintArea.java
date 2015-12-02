@@ -16,31 +16,36 @@ public class PaintArea extends JPanel{
 
     public void mandelbrot(Graphics g){
         Mandelbrot fractale = new Mandelbrot();
-        fractale.getxOne();
-        
+
         System.out.println("mandelbrot dessin: "+ fractale.getiNumber());
 
         //la couleur
         g.setColor(Color.blue);
 
         //les bornes de la fractale
-        double x1=-2.1;
+        /*double x1=-2.1;
         double x2=0.6;
         double y1=-1.2;
-        double y2=1.2;
+        double y2=1.2;*/
 
         //zoom, taille de la zone ou on va dessiner la fractale
-        int zoom=200;
+        /*int zoom=200;
         double largeur=(x2-x1)*zoom;
-        double hauteur=(y2-y1)*zoom;
+        double hauteur=(y2-y1)*zoom;*/
+
+        fractale.setW( (fractale.getxTwo() - fractale.getxOne() ) * fractale.gZoom());
+        fractale.setH( (fractale.getyTwo() - fractale.getyOne() ) * fractale.gZoom());
+
+
 
         //le nombre d'itération
-        int iter_max=150;
+        //int iter_max=150;
+        fractale.setiNumber(150);
 
 
-        double z_r,z_i,c_r,c_i;
+        //double z_r,z_i,c_r,c_i;
         //calcul
-        for(int x=0;x<largeur;x++){
+        /*for(int x=0;x<largeur;x++){
 
             for(int y=0;y<hauteur;y++){
 
@@ -67,6 +72,33 @@ public class PaintArea extends JPanel{
                     g.drawLine(x,y,x,y);
                 }
             }
+        } */
+
+        for(int x=0; x< fractale.getW(); ++x){
+            for(int y=0; y< fractale.getH(); ++y){
+                fractale.scr( ((double)x)/fractale.gZoom() + fractale.getxOne() );
+                fractale.sci( ((double)y)/fractale.gZoom() + fractale.getyOne() );
+
+
+                int i=0;
+                do{
+                    double tmp = fractale.gzr();
+
+                    //System.out.println( Math.pow( fractale.gzr(), 2) - Math.pow( fractale.gzi(), 2) + fractale.gcr() );
+
+                    fractale.szr( Math.pow( fractale.gzr(), 2) - Math.pow( fractale.gzi(), 2) + fractale.gcr() );
+                    System.out.println( fractale.gzr() );
+                    //fractale.szi( 2*fractale.gzi()*tmp + fractale.gci() ); */
+
+                    ++i;
+
+                }while( Math.pow( fractale.gzr(), 2) + Math.pow( fractale.gzi(), 2) <4 && i < fractale.getiNumber() );
+
+                if(i== fractale.getiNumber())
+                    g.drawLine(x,y,x,y);
+
+            }
+
         }
     }
 
