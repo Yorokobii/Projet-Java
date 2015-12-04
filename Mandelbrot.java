@@ -33,7 +33,7 @@ public class Mandelbrot {
         On sépare la partie imaginaire de z et c, nous avons donc deux variables pour z et c
     */
 
-    private double zReal = 0; // zr = zr² - zi²
+    private double zReal = 0; // zr = zr² - zi² + cr
     private double zImg = 0; // zi = 2*zr*zi + ci
 
     private double cReal = 0;
@@ -46,7 +46,7 @@ public class Mandelbrot {
     /* Variable pour récupérer la position de la souris à l'écran */
     /* Récupérer la taille de la fenêtre */
 
-    public Mandelbrot() { zoom = 200; width = xTwo - xOne; height = yTwo - xTwo; }
+    public Mandelbrot() { zoom = 2; width = xTwo - xOne; height = yTwo - xTwo; }
 
 
 
