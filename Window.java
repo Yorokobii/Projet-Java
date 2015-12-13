@@ -94,9 +94,9 @@ public class Window extends JFrame implements ActionListener {
 			String name = jop_iteration.showInputDialog(null, "Set the iteration number you want : ", "Iteration Number", JOptionPane.QUESTION_MESSAGE);
 
             Mandelbrot mandel = new Mandelbrot();
-            double value = Double.parseDouble(name);
+            int value = Integer.parseInt(name);
             mandel.setiNumber(value);
-            System.out.println("value "+mandel.getiNumber());
+            System.out.println("Nombre donné d'itérations : "+mandel.getiNumber());
 
             this.repaint();
         }
