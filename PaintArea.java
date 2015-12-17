@@ -10,8 +10,11 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class PaintArea extends JPanel implements MouseListener {
-    public PaintArea(){ addMouseListener(this); }
+public class PaintArea extends JPanel implements MouseListener, MouseWheelListener {
+    public PaintArea(){ 
+		addMouseListener(this); 
+		addMouseWheelListener(this); 
+	}
 
     public void paint(Graphics g){ mandelbrot(g); }
 
@@ -54,13 +57,21 @@ public class PaintArea extends JPanel implements MouseListener {
             }
     }
     
-    public void mouseClicked(MouseEvent e) 
-    {
+    public void mouseClicked(MouseEvent e){
 		 if (e.getButton()==MouseEvent.BUTTON1)
             System.out.println(e.getX()+" "+e.getY());
     }
+    
+    public void mouseWheelMoved(MouseWheelEvent e){
+		System.out.println(e.getWheelRotation());
+		 Mandelbrot fra = new Mandelbrot();
+		 fra.setZoom(fra.getZoom()+e.getWheelRotation()*20);
+		 
+		 this.repaint();
+		
 	
-	/*
+	}
+	
     public void mousePressed(MouseEvent e) {}
 
     public void mouseReleased(MouseEvent e) {}
@@ -68,5 +79,5 @@ public class PaintArea extends JPanel implements MouseListener {
     public void mouseEntered(MouseEvent e) {}
 
     public void mouseExited(MouseEvent e) {}
-    */
+
 }
