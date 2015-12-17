@@ -14,6 +14,7 @@ On devra pouvoir choisir le nombre d'itérations, zoomer ou dézoomer à la sour
 http://sdz.tdct.org/sdz/dessiner-la-fractale-de-mandelbrot.html
 
 */
+import java.awt.Color;
 
 public class Mandelbrot {
     // Bornes de dessin de la fractale
@@ -26,9 +27,24 @@ public class Mandelbrot {
     public final double getxt() { return xTwo; }
     public final double getyo() { return yOne; }
     public final double getyt() { return yTwo; }
+    
+    //Point à zoomer
+    private double xPaint = 0.1011;
+    private double yPaint = 0.9563;
+    
+    public final double getXPaint() { return xPaint; }
+    public final double getYPaint() { return yPaint; }
+    public void setXPaint(final double _xPaint) { xPaint = _xPaint; }
+    public void setYPaint(final double _yPaint) { yPaint = _yPaint; }
+
+	//Couleur
+	private Color color = Color.black;
+	
+	public Color getColor() { return color; }
+	public void setColor(Color _color) { color = _color; }
 
     // Zoom
-    private int zoom = 200;
+    private int zoom = 1000;
     public int getZoom() { return zoom; }
     public void setZoom(int z) { zoom = z; }
 
