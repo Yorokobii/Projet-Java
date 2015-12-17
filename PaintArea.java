@@ -8,9 +8,10 @@ Cette classe est la zone de dessin dans laquel nous devons dessiner la fractale 
 //* Liste imports
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
-public class PaintArea extends JPanel{
-    public PaintArea(){ }
+public class PaintArea extends JPanel implements MouseListener {
+    public PaintArea(){ addMouseListener(this); }
 
     public void paint(Graphics g){ mandelbrot(g); }
 
@@ -52,4 +53,20 @@ public class PaintArea extends JPanel{
 				g.drawLine(x,y,x,y);
             }
     }
+    
+    public void mouseClicked(MouseEvent e) 
+    {
+		 if (e.getButton()==MouseEvent.BUTTON1)
+            System.out.println(e.getX()+" "+e.getY());
+    }
+	
+	/*
+    public void mousePressed(MouseEvent e) {}
+
+    public void mouseReleased(MouseEvent e) {}
+
+    public void mouseEntered(MouseEvent e) {}
+
+    public void mouseExited(MouseEvent e) {}
+    */
 }
