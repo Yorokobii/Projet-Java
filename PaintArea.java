@@ -29,8 +29,8 @@ public class PaintArea extends JPanel{
                 fra.setzr(0);
                 fra.setzi(0);
 
-                fra.setcr( (double)x/ (fra.getZoom() + fra.getxo()) );
-                fra.setci( (double)y/ (fra.getZoom() + fra.getyo()) );
+                fra.setcr( (double)x/ (fra.getZoom() + fra.getXPaint()) );
+                fra.setci( (double)y/ (fra.getZoom() + fra.getYPaint()) );
 
                 int i=0;
 
@@ -44,7 +44,12 @@ public class PaintArea extends JPanel{
                 }while( Math.pow( fra.getzr(), 2 ) + Math.pow( fra.getzi(), 2 ) < 4 && i <  fra.getiNumber() );
 
                 //allumer pixel
-                if(i == fra.getiNumber()) g.drawLine(x,y,x,y);
+                if(i <= fra.getiNumber()-1)
+					fra.setColor(new Color(0,(int)(i*(255/fra.getiNumber())),0));
+				else
+					fra.setColor(Color.black);
+				g.setColor(fra.getColor());
+				g.drawLine(x,y,x,y);
             }
     }
 }
