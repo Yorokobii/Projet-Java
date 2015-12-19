@@ -39,17 +39,23 @@ public class Window extends JFrame implements ActionListener {
 	//______ MENU ITEM ________________
 
 		// Création des différents items composant l'onglet Options
+        JMenuItem item_point = new JMenuItem("Point");
 		JMenuItem item_iteration = new JMenuItem("Iteration number");
 		JMenuItem item_color = new JMenuItem("Color");
 		JMenuItem item_zoom = new JMenuItem("Zoom");
 		JMenuItem item_exit = new JMenuItem("Exit");
 
 		// Ajout des items à l'onglet
+        option.add(item_point);
 		option.add(item_iteration);
 		option.add(item_color);
 		option.add(item_zoom);
 		option.add(new JSeparator());
 		option.add(item_exit);
+
+        // Action effectuée sur item_point
+        item_point.setActionCommand("point");
+        item_point.addActionListener(this);
 
 		// Action effectuée sur item_iteration
 		item_iteration.setActionCommand("iteration");
@@ -97,6 +103,19 @@ public class Window extends JFrame implements ActionListener {
             int value = Integer.parseInt(name);
             mandel.setiNumber(value);
             System.out.println("Nombre donné d'itérations : "+mandel.getiNumber());
+
+            this.repaint();
+        }
+
+        if(evenement.getActionCommand().equals("point")){
+            JOptionPane jop_point = new JOptionPane();
+            int pointx = Integer.parseInt(jop_point.showInputDialog(null, "Set the x of the point you want : ", "Point", JOptionPane.QUESTION_MESSAGE));
+            int pointy = Integer.parseInt(jop_point.showInputDialog(null, "Set the y of the point you want : ", "Point", JOptionPane.QUESTION_MESSAGE));
+
+            Mandelbrot mandel = new Mandelbrot();
+            mandel.setXPaint(pointx);
+            mandel.setYPaint(pointy);
+            System.out.println("Nouveau point : " + mandel.getXPaint() + "," + mandel.getYPaint());
 
             this.repaint();
         }

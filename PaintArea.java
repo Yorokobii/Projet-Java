@@ -11,7 +11,10 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class PaintArea extends JPanel implements MouseListener, MouseWheelListener {
+    private static Mandelbrot fra;
+
     public PaintArea(){ 
+        fra = new Mandelbrot();
 		addMouseListener(this); 
 		addMouseWheelListener(this); 
 	}
@@ -21,20 +24,19 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
     public void mandelbrot(Graphics g){
         //la couleur
         g.setColor(Color.blue);
-        Mandelbrot fra = new Mandelbrot();
 
         System.out.println("Zoom : "+fra.getZoom() );
         System.out.println("Largeur : "+fra.getWidth()+" - Hauteur : "+fra.getHeight());
         System.out.println("Nombre d'itérations : "+fra.getiNumber() );
 
-        for(int x=0;x< fra.getWidth() ;x++)
-            for(int y=0;y<  fra.getHeight() ;y++){
+        for(int x=-this.getSize().width/2;x< this.getSize().width/2 ;x++)
+            for(int y=-this.getSize().height/2;y<  this.getSize().height/2 ;y++){
 
                 fra.setzr(0);
                 fra.setzi(0);
 
-                fra.setcr( (double)x/ (fra.getZoom() + fra.getXPaint()) );
-                fra.setci( (double)y/ (fra.getZoom() + fra.getYPaint()) );
+                fra.setcr( (double)x/ fra.getZoom() + fra.getXPaint() );
+                fra.setci( (double)y/ fra.getZoom() + fra.getYPaint() );
 
                 int i=0;
 
@@ -49,11 +51,11 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
 
                 //allumer pixel
                 if(i <= fra.getiNumber()-1)
-					fra.setColor(new Color(0,(int)(i*(255/fra.getiNumber())),0));
+					fra.setColor(new Color(100,(int)(i*(255/fra.getiNumber())),0));
 				else
 					fra.setColor(Color.black);
 				g.setColor(fra.getColor());
-				g.drawLine(x,y,x,y);
+				g.drawLine(x+this.getSize().width/2,y+this.getSize().height/2,x+this.getSize().width/2,y+this.getSize().height/2);
             }
     }
     
@@ -64,12 +66,9 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
     
     public void mouseWheelMoved(MouseWheelEvent e){
 		System.out.println(e.getWheelRotation());
-		 Mandelbrot fra = new Mandelbrot();
-		 fra.setZoom(fra.getZoom()+e.getWheelRotation()*20);
+		fra.setZoom(fra.getZoom()-e.getWheelRotation()*(fra.getZoom()/30));
 		 
-		 this.repaint();
-		
-	
+		this.repaint();	
 	}
 	
     public void mousePressed(MouseEvent e) {}
