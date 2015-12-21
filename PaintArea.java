@@ -1,4 +1,4 @@
-/**
+/***
 Commentaires :
 Cette classe est la zone de dessin dans laquel nous devons dessiner la fractale de Mandelbrot
 
@@ -14,7 +14,7 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
     private static Mandelbrot fra;
 
     public PaintArea(){ 
-        fra = new Mandelbrot();
+        fra = new Mandelbrot(200,300);
 		addMouseListener(this); 
 		addMouseWheelListener(this); 
 	}
@@ -22,12 +22,9 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
     public void paint(Graphics g){ mandelbrot(g); }
 
     public void mandelbrot(Graphics g){
-        //la couleur
-        g.setColor(Color.blue);
-
         System.out.println("Zoom : "+fra.getZoom() );
         System.out.println("Largeur : "+fra.getWidth()+" - Hauteur : "+fra.getHeight());
-        System.out.println("Nombre d'itérations : "+fra.getiNumber() );
+        System.out.println("Nombre iterations : "+fra.getiNumber() );
 
         for(int x=-this.getSize().width/2;x< this.getSize().width/2 ;x++)
             for(int y=-this.getSize().height/2;y<  this.getSize().height/2 ;y++){
@@ -39,7 +36,6 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
                 fra.setci( (double)y/ fra.getZoom() + fra.getYPaint() );
 
                 int i=0;
-
                 do{
                     double tmp = fra.getzr();
 
@@ -51,7 +47,7 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
 
                 //allumer pixel
                 if(i <= fra.getiNumber()-1)
-					fra.setColor(new Color(100,(int)(i*(255/fra.getiNumber())),0));
+					fra.setColor(new Color(0,(int)(i*(255/fra.getiNumber())),0));
 				else
 					fra.setColor(Color.black);
 				g.setColor(fra.getColor());
@@ -60,8 +56,10 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
     }
     
     public void mouseClicked(MouseEvent e){
-		 if (e.getButton()==MouseEvent.BUTTON1)
+		 if (e.getButton()==MouseEvent.BUTTON1){
             System.out.println(e.getX()+" "+e.getY());
+
+         }
     }
     
     public void mouseWheelMoved(MouseWheelEvent e){

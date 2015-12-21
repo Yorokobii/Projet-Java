@@ -1,4 +1,4 @@
-/**
+/***
 La classe Mandelbrot
 
 SUJET :
@@ -29,8 +29,8 @@ public class Mandelbrot {
     public final double getyt() { return yTwo; }
     
     //Point à zoomer
-    private double xPaint = -1.401155;
-    private double yPaint = 0;
+    private static double xPaint;
+    private static double yPaint;
     
     public final double getXPaint() { return xPaint; }
     public final double getYPaint() { return yPaint; }
@@ -44,12 +44,12 @@ public class Mandelbrot {
 	public void setColor(Color _color) { color = _color; }
 
     // Zoom
-    private int zoom = 300;
+    private static int zoom;
     public int getZoom() { return zoom; }
     public void setZoom(int z) { zoom = z; }
 
     // Nombre d'itérations
-    private static int iterMax = 200;
+    private static int iterMax;
     public int getiNumber() { return iterMax; }
     public void setiNumber(int i) { iterMax = i; }
 
@@ -77,6 +77,8 @@ public class Mandelbrot {
     public Mandelbrot(int _iterMax, int _zoom){
         iterMax = _iterMax;
         zoom = _zoom;
+        xPaint = -0.743643887037151;
+        yPaint = 0.13182590420533;
     }
 
     // Constructeur sans paramètres
