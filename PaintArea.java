@@ -14,7 +14,7 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
     private static Mandelbrot fra;
 
     public PaintArea(){
-        fra = new Mandelbrot(200,300);
+        fra = new Mandelbrot(10,300);
 		addMouseListener(this);
 		addMouseWheelListener(this);
 	}
@@ -35,7 +35,7 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
                 fra.setcr( (double)x/ fra.getZoom() + fra.getXPaint() );
                 fra.setci( (double)y/ fra.getZoom() + fra.getYPaint() );
 
-                int i=0;
+                double i=0.0;
                 do{
                     double tmp = fra.getzr();
 
@@ -47,10 +47,8 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
 
                 //allumer pixel
                 if(i <= fra.getiNumber()-1){
-                    if(fra.getiNumber()<=255)
-                        fra.setColor(new Color(0,(int)(i*(255/fra.getiNumber())),0));
-                    else
-                        fra.setColor(new Color(255,0,0));
+                    double tmp = i*255/fra.getiNumber();
+                    fra.setColor(new Color(0,(int)tmp,0));
                 }
 				else
 					fra.setColor(Color.black);
@@ -70,7 +68,7 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
         dès 29 en quelque sorte. En effet une fois à 29 nous sommes bloqués et il est
         impossible de bouger en +1 et -1 avec le MouseWheel. */
         if(fra.getZoom()>=30){
-            fra.setZoom(fra.getZoom()-e.getWheelRotation()*(fra.getZoom()/30)); // < ça vient de ce choix de division par 30
+            fra.setZoom(fra.getZoom()-e.getWheelRotation()*(fra.getZoom()/30)); // < ça vient de ce choix de division par 30 (nous travaillons avec des int et pas des doubles)
 	        this.repaint();
         }
         else{

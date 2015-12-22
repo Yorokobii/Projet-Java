@@ -47,6 +47,8 @@ public class Mandelbrot {
     private static long zoom;
     public long getZoom() { return zoom; }
     public void setZoom(long z) { zoom = z; }
+    public static int ratiozoom = 20;
+
 
     // Nombre d'itérations
     private static int iterMax;
