@@ -137,6 +137,27 @@ public class Window extends JFrame implements ActionListener {
             this.repaint();
         }
 
+    //______ DEFAULT _____________________________
+        if(evenement.getActionCommand().equals("zoom")){
+            JOptionPane jop_point = new JOptionPane();
+            int z = 0;
+            boolean isok = false;
+            while(!isok){
+                z = Integer.parseInt(jop_point.showInputDialog(null, "Set the zoom you want : ", "Zoom", JOptionPane.QUESTION_MESSAGE));
+                if(z>=30)
+                    isok = true;
+                else{
+                    JOptionPane jop = new JOptionPane();
+                    jop.showMessageDialog(null, "Entrez un zoom supérieur ou égal à 30", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+            mandel = new Mandelbrot();
+            mandel.setZoom(z);
+
+            this.repaint();
+        }
+
 
 	}
 

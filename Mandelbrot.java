@@ -27,11 +27,11 @@ public class Mandelbrot {
     public final double getxt() { return xTwo; }
     public final double getyo() { return yOne; }
     public final double getyt() { return yTwo; }
-    
+
     //Point à zoomer
     private static double xPaint;
     private static double yPaint;
-    
+
     public final double getXPaint() { return xPaint; }
     public final double getYPaint() { return yPaint; }
     public void setXPaint(final double _xPaint) { xPaint = _xPaint; }
@@ -39,14 +39,14 @@ public class Mandelbrot {
 
 	//Couleur
 	private Color color;
-	
+
 	public Color getColor() { return color; }
 	public void setColor(Color _color) { color = _color; }
 
     // Zoom
-    private static int zoom;
-    public int getZoom() { return zoom; }
-    public void setZoom(int z) { zoom = z; }
+    private static long zoom;
+    public long getZoom() { return zoom; }
+    public void setZoom(long z) { zoom = z; }
 
     // Nombre d'itérations
     private static int iterMax;
@@ -74,7 +74,7 @@ public class Mandelbrot {
     public void setci(double ci) { cImag = ci; }
 
     // Constructeur avec paramètres
-    public Mandelbrot(int _iterMax, int _zoom){
+    public Mandelbrot(int _iterMax, long _zoom){
         iterMax = _iterMax;
         zoom = _zoom;
         xPaint = -0.743643887037151;
