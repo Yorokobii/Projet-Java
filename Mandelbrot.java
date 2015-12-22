@@ -38,7 +38,7 @@ public class Mandelbrot {
     public void setYPaint(final double _yPaint) { yPaint = _yPaint; }
 
 	//Couleur
-	private Color color = Color.black;
+	private Color color;
 	
 	public Color getColor() { return color; }
 	public void setColor(Color _color) { color = _color; }
