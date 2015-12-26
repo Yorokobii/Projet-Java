@@ -47,7 +47,10 @@ public class Mandelbrot {
     private static long zoom;
     public long getZoom() { return zoom; }
     public void setZoom(long z) { zoom = z; }
-    public static int ratiozoom = 20; // Pour changer manuellement le 30 atm
+    private static int ratiozoom = 30; // Pour changer manuellement le 30 atm
+    public int getRatio() { return ratiozoom; }
+    public void setRatio(int ratio) { ratiozoom = ratio; }
+
 
 
     // Nombre d'itérations

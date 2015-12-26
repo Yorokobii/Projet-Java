@@ -14,7 +14,7 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
     private static Mandelbrot fra;
 
     public PaintArea(){
-        fra = new Mandelbrot(10,300);
+        fra = new Mandelbrot(250,300);
 		addMouseListener(this);
 		addMouseWheelListener(this);
 	}
@@ -67,12 +67,12 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
         /** Un problème apparaît lorsque l'on essaye de "dézoomer" en dessous de 30,
         dès 29 en quelque sorte. En effet une fois à 29 nous sommes bloqués et il est
         impossible de bouger en +1 et -1 avec le MouseWheel. */
-        if(fra.getZoom()>=30){
-            fra.setZoom(fra.getZoom()-e.getWheelRotation()*(fra.getZoom()/30)); // < ça vient de ce choix de division par 30 (nous travaillons avec des int et pas des doubles)
+        if(fra.getZoom()>=fra.getRatio()){
+            fra.setZoom(fra.getZoom()-e.getWheelRotation()*(fra.getZoom()/fra.getRatio())); // < ça vient de ce choix de division par 30 (nous travaillons avec des int et pas des doubles)
 	        this.repaint();
         }
         else{
-            fra.setZoom(30);
+            fra.setZoom(fra.getRatio());
             JOptionPane jop2 = new JOptionPane();
             jop2.showMessageDialog(null, "Impossible d'aller plus loin", "Attention", JOptionPane.WARNING_MESSAGE); //< Pour y palier on affiche un message, et on empêche de pouvoir aller plus loin
         }

@@ -133,22 +133,24 @@ public class Window extends JFrame implements ActionListener {
         if(evenement.getActionCommand().equals("default")){
             mandel = new Mandelbrot(200,300);
             setSize(810,720);
+            mandel.setRatio(30);
 
             this.repaint();
         }
 
     //______ DEFAULT _____________________________
         if(evenement.getActionCommand().equals("zoom")){
+            mandel = new Mandelbrot();
             JOptionPane jop_point = new JOptionPane();
             int z = 0;
             boolean isok = false;
             while(!isok){
                 z = Integer.parseInt(jop_point.showInputDialog(null, "Set the zoom you want : ", "Zoom", JOptionPane.QUESTION_MESSAGE));
-                if(z>=30)
+                if(z>=mandel.getRatio())
                     isok = true;
                 else{
                     JOptionPane jop = new JOptionPane();
-                    jop.showMessageDialog(null, "Entrez un zoom supérieur ou égal à 30", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    jop.showMessageDialog(null, "Entrez un zoom supérieur ou égal à "+mandel.getRatio(), "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -156,6 +158,18 @@ public class Window extends JFrame implements ActionListener {
             mandel.setZoom(z);
 
             this.repaint();
+        }
+
+    //______ DEFAULT _____________________________
+        if(evenement.getActionCommand().equals("color")){
+            mandel = new Mandelbrot();
+
+            JOptionPane jop_point = new JOptionPane();
+            int pointx = Integer.parseInt(jop_point.showInputDialog(null, "Set the x of the point you want : ", "Point", JOptionPane.QUESTION_MESSAGE));
+
+            mandel.setRatio(pointx);
+            this.repaint();
+
         }
 
 
