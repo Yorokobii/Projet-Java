@@ -43,6 +43,7 @@ public class Window extends JFrame implements ActionListener {
 		// Création des différents items composant l'onglet Options
         JMenuItem item_iteration = new JMenuItem("Iteration number");
         JMenuItem item_point = new JMenuItem("Point");
+        JMenuItem item_ratio = new JMenuItem("Ratio of the MouseWheel");
 		JMenuItem item_color = new JMenuItem("Color");
 		JMenuItem item_zoom = new JMenuItem("Zoom");
         JMenuItem item_default = new JMenuItem("Reset default");
@@ -51,6 +52,7 @@ public class Window extends JFrame implements ActionListener {
 		// Ajout des items à l'onglet
         option.add(item_iteration);
         option.add(item_point);
+        option.add(item_ratio);
 		option.add(item_color);
 		option.add(item_zoom);
 		option.add(new JSeparator());
@@ -65,7 +67,11 @@ public class Window extends JFrame implements ActionListener {
 		item_iteration.setActionCommand("iteration");
         item_iteration.addActionListener(this);
 
-		// Action effectuée sur item_color
+		// Action effectuée sur item_ratio
+        item_ratio.setActionCommand("ratio");
+        item_ratio.addActionListener(this);
+
+        // Action effectuée sur item_color
         item_color.setActionCommand("color");
         item_color.addActionListener(this);
 
@@ -161,11 +167,11 @@ public class Window extends JFrame implements ActionListener {
         }
 
     //______ DEFAULT _____________________________
-        if(evenement.getActionCommand().equals("color")){
+        if(evenement.getActionCommand().equals("ratio")){
             mandel = new Mandelbrot();
 
             JOptionPane jop_point = new JOptionPane();
-            int pointx = Integer.parseInt(jop_point.showInputDialog(null, "Set the x of the point you want : ", "Point", JOptionPane.QUESTION_MESSAGE));
+            int pointx = Integer.parseInt(jop_point.showInputDialog(null, "By how much do you want to devide the wheel zoom ?", "MouseWheel Zoom", JOptionPane.QUESTION_MESSAGE));
 
             mandel.setRatio(pointx);
             this.repaint();
