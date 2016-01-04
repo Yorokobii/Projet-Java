@@ -41,12 +41,12 @@ public class Window extends JFrame implements ActionListener {
 	//______ MENU ITEM ________________
 
 		// Création des différents items composant l'onglet Options
-        JMenuItem item_iteration = new JMenuItem("Iteration number");
+        JMenuItem item_iteration = new JMenuItem("Nombre d'itérations");
         JMenuItem item_point = new JMenuItem("Point");
-		JMenuItem item_color = new JMenuItem("Color");
+		JMenuItem item_color = new JMenuItem("Couleur");
 		JMenuItem item_zoom = new JMenuItem("Zoom");
-        JMenuItem item_default = new JMenuItem("Reset default");
-		JMenuItem item_exit = new JMenuItem("Exit");
+        JMenuItem item_default = new JMenuItem("Defaut");
+		JMenuItem item_exit = new JMenuItem("Quitter");
 
 		// Ajout des items à l'onglet
         option.add(item_iteration);
@@ -105,7 +105,7 @@ public class Window extends JFrame implements ActionListener {
     //______ ITERATION ___________________________
 		if(evenement.getActionCommand().equals("iteration")){
             JOptionPane jop_iteration = new JOptionPane();
-			String name = jop_iteration.showInputDialog(null, "Set the iteration number you want : ", "Iteration Number", JOptionPane.QUESTION_MESSAGE);
+			String name = jop_iteration.showInputDialog(null, "Entrez le nombre d'itérations que vous voulez : ", "Iteration Number", JOptionPane.QUESTION_MESSAGE);
 
             mandel = new Mandelbrot();
             int value = Integer.parseInt(name);
@@ -118,8 +118,8 @@ public class Window extends JFrame implements ActionListener {
     //______ POINT _______________________________
         if(evenement.getActionCommand().equals("point")){
             JOptionPane jop_point = new JOptionPane();
-            double pointx = Double.parseDouble(jop_point.showInputDialog(null, "Set the x of the point you want : ", "Point", JOptionPane.QUESTION_MESSAGE));
-            double pointy = Double.parseDouble(jop_point.showInputDialog(null, "Set the y of the point you want : ", "Point", JOptionPane.QUESTION_MESSAGE));
+            double pointx = Double.parseDouble(jop_point.showInputDialog(null, "Entrez la coordonnée x de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE));
+            double pointy = Double.parseDouble(jop_point.showInputDialog(null, "Entrez la coordonnée y de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE));
 
             mandel = new Mandelbrot();
             mandel.setXPaint(pointx);
@@ -131,9 +131,9 @@ public class Window extends JFrame implements ActionListener {
 
     //______ DEFAULT _____________________________
         if(evenement.getActionCommand().equals("default")){
-            mandel = new Mandelbrot(200,300);
+            mandel = new Mandelbrot(250,300);
             setSize(810,720);
-
+            setLocationRelativeTo(null);
             this.repaint();
         }
 
@@ -144,7 +144,7 @@ public class Window extends JFrame implements ActionListener {
             int z = 0;
             boolean isok = false;
             while(!isok){
-                z = Integer.parseInt(jop_point.showInputDialog(null, "Set the zoom you want : ", "Zoom", JOptionPane.QUESTION_MESSAGE));
+                z = Integer.parseInt(jop_point.showInputDialog(null, "A combien voulez-vous zoomer ? ", "Zoom", JOptionPane.QUESTION_MESSAGE));
                 if(z>=mandel.getRatio())
                     isok = true;
                 else{
@@ -164,13 +164,8 @@ public class Window extends JFrame implements ActionListener {
         if(evenement.getActionCommand().equals("color")){
             ZDialog dialog = new ZDialog(this, "Color", true);
 
-            //this.repaint();
+            this.repaint();
         }
-
-
 	}
-
-
-
 
 }
