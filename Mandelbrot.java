@@ -47,11 +47,9 @@ public class Mandelbrot {
     private static long zoom;
     public long getZoom() { return zoom; }
     public void setZoom(long z) { zoom = z; }
-    private static int ratiozoom = 30; // Pour changer manuellement le 30 atm
+    private int ratiozoom = 30;
     public int getRatio() { return ratiozoom; }
     public void setRatio(int ratio) { ratiozoom = ratio; }
-
-
 
     // Nombre d'itérations
     private static int iterMax;
@@ -84,8 +82,11 @@ public class Mandelbrot {
         zoom = _zoom;
         xPaint = -0.743643887037151;
         yPaint = 0.13182590420533;
+        basecolor = new Color(0,255,0);
     }
 
     // Constructeur sans paramètres
     public Mandelbrot() { }
+
+    public static Color basecolor;
 }

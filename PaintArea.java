@@ -47,8 +47,10 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
 
                 //allumer pixel
                 if(i <= fra.getiNumber()-1){
-                    double tmp = i*255/fra.getiNumber();
-                    fra.setColor(new Color(0,(int)tmp,0));
+                    double red = i*fra.basecolor.getRed()/fra.getiNumber();
+                    double green = i*fra.basecolor.getGreen()/fra.getiNumber();
+                    double blue = i*fra.basecolor.getBlue()/fra.getiNumber();
+                    fra.setColor(new Color((int)red,(int)green,(int)blue));
                 }
 				else
 					fra.setColor(Color.black);
