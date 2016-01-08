@@ -61,7 +61,9 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
 
     public void mouseClicked(MouseEvent e){
 		 if (e.getButton()==MouseEvent.BUTTON1){
-            System.out.println(e.getX()+" "+e.getY());
+            fra.setXPaint(fra.getXPaint()-((this.getSize().width/2-e.getX())/(double)fra.getZoom()));
+            fra.setYPaint(fra.getYPaint()-((this.getSize().height/2-e.getY())/(double)fra.getZoom()));
+            this.repaint();
          }
     }
 

@@ -52,13 +52,15 @@ public class ZDialog extends JDialog {
     JButton okBouton = new JButton("OK");
     okBouton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evenement) {
-            int red = Integer.parseInt(r.getText());
-            int green = Integer.parseInt(g.getText());
-            int blue = Integer.parseInt(b.getText());
-
-            if(red<=255 && red>=0 && blue<=255 && blue>=0 && green<=255 && green>=0){
-                mandel.basecolor = new Color(red, green, blue);
-                setVisible(false);
+            if(r.getText().matches("-?\\d+(\\.\\d+)?") && b.getText().matches("-?\\d+(\\.\\d+)?") && g.getText().matches("-?\\d+(\\.\\d+)?")){ //test si r, g et b sont des nombres
+                int red = Integer.parseInt(r.getText());
+                int green = Integer.parseInt(g.getText());
+                int blue = Integer.parseInt(b.getText());
+                
+                if(red<=255 && red>=0 && blue<=255 && blue>=0 && green<=255 && green>=0){
+                    mandel.basecolor = new Color(red, green, blue);
+                    setVisible(false);
+                }
             }
         }
     });

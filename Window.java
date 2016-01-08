@@ -105,14 +105,16 @@ public class Window extends JFrame implements ActionListener {
     //______ ITERATION ___________________________
 		if(evenement.getActionCommand().equals("iteration")){
             JOptionPane jop_iteration = new JOptionPane();
-			String name = jop_iteration.showInputDialog(null, "Entrez le nombre d'itérations que vous voulez : ", "Iteration Number", JOptionPane.QUESTION_MESSAGE);
+			String iter = jop_iteration.showInputDialog(null, "Entrez le nombre d'itérations que vous voulez : ", "Iteration Number", JOptionPane.QUESTION_MESSAGE);
 
-            mandel = new Mandelbrot();
-            int value = Integer.parseInt(name);
-            mandel.setiNumber(value);
-            System.out.println("Nouveau nombre iterations : "+mandel.getiNumber());
+            if(iter.matches("-?\\d+(\\.\\d+)?")){ //test si le texte est un nombre
+                mandel = new Mandelbrot();
+                int value = Integer.parseInt(iter);
+                mandel.setiNumber(value);
+                System.out.println("Nouveau nombre iterations : "+mandel.getiNumber());
 
-            this.repaint();
+                this.repaint();
+            }
         }
 
     //______ POINT _______________________________
@@ -121,6 +123,7 @@ public class Window extends JFrame implements ActionListener {
             double pointx = Double.parseDouble(jop_point.showInputDialog(null, "Entrez la coordonnée x de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE));
             double pointy = Double.parseDouble(jop_point.showInputDialog(null, "Entrez la coordonnée y de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE));
 
+            
             mandel = new Mandelbrot();
             mandel.setXPaint(pointx);
             mandel.setYPaint(pointy);
