@@ -28,7 +28,6 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
 
         for(int x=-this.getSize().width/2;x< this.getSize().width/2 ;x++)
             for(int y=-this.getSize().height/2;y<  this.getSize().height/2 ;y++){
-
                 fra.setzr(0);
                 fra.setzi(0);
 
