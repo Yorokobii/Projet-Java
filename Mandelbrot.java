@@ -46,11 +46,13 @@ public class Mandelbrot {
     private double cReal;   // Partie réelle du nombre complexe c
     private double cImag;   // Partie imaginaire du bombre complexe c
 
+    // Accesseurs
     public double getzr() { return zReal; }
     public double getzi() { return zImag; }
     public double getcr() { return cReal; }
     public double getci() { return cImag; }
 
+    // Mutateurs
     public void setzr(double zr) { zReal = zr; }
     public void setzi(double zi) { zImag = zi; }
     public void setcr(double cr) { cReal = cr; }
@@ -60,9 +62,9 @@ public class Mandelbrot {
     public Mandelbrot(int _iterMax, long _zoom){
         iterMax = _iterMax;
         zoom = _zoom;
-        xPaint = -0.743643887037151;
+        xPaint = -0.743643887037151; // Point par défaut zoomant sur la vallée des hippocampes
         yPaint = 0.13182590420533;
-        basecolor = new Color(0,255,0);
+        basecolor = new Color(0,255,0); // Couleur de base : vert
         multiple_color = true;
     }
 

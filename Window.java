@@ -85,29 +85,37 @@ public class Window extends JFrame implements ActionListener {
             // Création d'une fenêtre de dialogue
             JOptionPane jop_iteration = new JOptionPane();
 			String iter = jop_iteration.showInputDialog(null, "Entrez le nombre d'itérations que vous voulez : ", "Iteration Number", JOptionPane.QUESTION_MESSAGE);
+            if(iter !=null){
+                if(iter.matches("-?\\d+(\\.\\d+)?")){ // Test si le texte est un nombre
+                    mandel = new Mandelbrot();      // Appel du constructeur sans paramètres de la classe Mandelbrot pour pouvoir modifier ses membres statics
+                    int value = Integer.parseInt(iter);
+                    mandel.setiNumber(value);   // Modifications du nombre d'itérations dans le programme tout entier, et non uniquement dans cette fonction.
+                    System.out.println("Nouveau nombre iterations : "+mandel.getiNumber());
 
-            if(iter.matches("-?\\d+(\\.\\d+)?")){ // Test si le texte est un nombre
-                mandel = new Mandelbrot();      // Appel du constructeur sans paramètres de la classe Mandelbrot pour pouvoir modifier ses membres statics
-                int value = Integer.parseInt(iter);
-                mandel.setiNumber(value);   // Modifications du nombre d'itérations dans le programme tout entier, et non uniquement dans cette fonction.
-                System.out.println("Nouveau nombre iterations : "+mandel.getiNumber());
-
-                this.repaint(); // Nécessaire pour redessiner notre fractale.
+                    this.repaint(); // Nécessaire pour redessiner notre fractale.
+                }
             }
+
         }
 
         // Action concernant "point"
         if(evenement.getActionCommand().equals("point")){
             JOptionPane jop_point = new JOptionPane();
-            double pointx = Double.parseDouble(jop_point.showInputDialog(null, "Entrez la coordonnée x de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE));
-            double pointy = Double.parseDouble(jop_point.showInputDialog(null, "Entrez la coordonnée y de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE));
+            String px = jop_point.showInputDialog(null, "Entrez la coordonnée x de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE);
+            String py = jop_point.showInputDialog(null, "Entrez la coordonnée y de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE);
 
-            mandel = new Mandelbrot();
-            mandel.setXPaint(pointx);
-            mandel.setYPaint(pointy);
-            System.out.println("Nouveau point : " + mandel.getXPaint() + "," + mandel.getYPaint());
+            if(px != null && py != null && px.matches("-?\\d+(\\.\\d+)?") && py.matches("-?\\d+(\\.\\d+)?")){
+                double pointx = Double.parseDouble(px);
+                double pointy = Double.parseDouble(py);
 
-            this.repaint();
+                mandel = new Mandelbrot();
+                mandel.setXPaint(pointx);
+                mandel.setYPaint(pointy);
+                System.out.println("Nouveau point : " + mandel.getXPaint() + "," + mandel.getYPaint());
+
+                this.repaint();
+            }
+
         }
 
         // Action sur "default"
@@ -122,19 +130,25 @@ public class Window extends JFrame implements ActionListener {
         if(evenement.getActionCommand().equals("zoom")){
             mandel = new Mandelbrot();
             JOptionPane jop_point = new JOptionPane();
-            int z = 0;
+            long z = 0;
             boolean isok = false;
             while(!isok){
-                z = Integer.parseInt(jop_point.showInputDialog(null, "A combien voulez-vous zoomer ? ", "Zoom", JOptionPane.QUESTION_MESSAGE));
-                if(z>=mandel.getRatio())
-                    isok = true;
+                String sz = jop_point.showInputDialog(null, "A combien voulez-vous zoomer ? ", "Zoom", JOptionPane.QUESTION_MESSAGE);
+                if(sz != null && sz.matches("-?\\d+(\\.\\d+)?")){
+                    z = Integer.parseInt(sz);
+                    if(z>=mandel.getRatio())
+                        isok = true;
+                    else{
+                        JOptionPane jop = new JOptionPane();
+                        jop.showMessageDialog(null, "Entrez un zoom supérieur ou égal à "+mandel.getRatio(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
                 else{
-                    JOptionPane jop = new JOptionPane();
-                    jop.showMessageDialog(null, "Entrez un zoom supérieur ou égal à "+mandel.getRatio(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                    z = mandel.getZoom();
+                    isok = true;
                 }
             }
 
-            mandel = new Mandelbrot();
             mandel.setZoom(z);
 
             this.repaint();
@@ -142,7 +156,6 @@ public class Window extends JFrame implements ActionListener {
 
         if(evenement.getActionCommand().equals("color")){
             RGBDialog dialog = new RGBDialog(this, "Color", true);
-
             this.repaint();
         }
 	}
