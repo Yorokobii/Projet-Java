@@ -19,6 +19,7 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
 		addMouseWheelListener(this); // Permet la gestion de la molette dans l'ensemble de la classe
         fra.colorTab = new Color[3*256];
 
+        /*******permet la coloration dégradée******/
         for(int i=0; i<(3*256); ++i){
             int red=0;
             int green=0;
@@ -36,6 +37,7 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
 
             fra.colorTab[i] = new Color(red, green, blue);
         }
+        /*****************************************/
 	}
 
     public void paint(Graphics g){
@@ -43,8 +45,8 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
         System.out.println("Iterations : "+fra.getiNumber() );
         System.out.println("Points = "+fra.getXPaint()+" + "+fra.getYPaint()+"i");
 
-        for(int x=-this.getSize().width/2;x< this.getSize().width/2 ;x++)                   // > Guillaume a expliquer
-            for(int y=-this.getSize().height/2;y<  this.getSize().height/2 ;y++){           // > same pélo
+        for(int x=-this.getSize().width/2;x< this.getSize().width/2 ;x++)
+            for(int y=-this.getSize().height/2;y<  this.getSize().height/2 ;y++){
                 fra.setzr(0);
                 fra.setzi(0);
 
@@ -59,19 +61,23 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
                     fra.setzi( (2*fra.getzi()*tmp) + fra.getci() );
 
                     ++i;
-                }while( Math.pow( fra.getzr(), 2 ) + Math.pow( fra.getzi(), 2 ) < 4 && i <  fra.getiNumber() );
+                }while( Math.pow( fra.getzr(), 2 ) + Math.pow( fra.getzi(), 2 ) < 4 && i <  fra.getiNumber() );/*répeter l'operation jusqu'à ce que
+                                                                                                                 le module du nombre complexe dépasse
+                                                                                                                 2 ou que le nombre d'iterations max
+                                                                                                                 soit atteint*/
 
-                double modulo = Math.sqrt( Math.pow(fra.getzr(),2) + Math.pow(fra.getzi(),2) );
-                //allumer pixel
+
+                double module = Math.sqrt( Math.pow(fra.getzr(),2) + Math.pow(fra.getzi(),2) ); //utilisé pour la coloration dégradée
+                /*definir la couleur du pixel a dessiner*/
                 if(i < fra.getiNumber() ){
-                    if(fra.multiple_color){
-                        double mu = i - Math.log(Math.log( modulo ))/ Math.log(2);
+                    if(fra.multiple_color){ // si le booleen multiple_color est a true on dessine la fractale selon ce schema de coloration dégradée
+                        double mu = i - Math.log(Math.log( module ))/ Math.log(2);
                         int colorIndex = (int) ( (mu/fra.getiNumber()) * 768);
                         if(colorIndex >= 768) colorIndex=0;
                         if(colorIndex <0) colorIndex = 0;
                         fra.setColor(fra.colorTab[colorIndex]);
                     }
-                    else{
+                    else{//sinon on la dessine selon ce schema
                         double red = i*fra.basecolor.getRed()/fra.getiNumber();
                         double green = i*fra.basecolor.getGreen()/fra.getiNumber();
                         double blue = i*fra.basecolor.getBlue()/fra.getiNumber();
@@ -80,7 +86,7 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
                 }
                 else
                     fra.setColor(Color.black);
-
+                /*dessine le pixel*/
 				g.setColor(fra.getColor());
 				g.drawLine(x+this.getSize().width/2,-y+this.getSize().height/2,x+this.getSize().width/2,-y+this.getSize().height/2);
             }
