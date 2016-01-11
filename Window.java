@@ -135,7 +135,7 @@ public class Window extends JFrame implements ActionListener {
             while(!isok){
                 String sz = jop_point.showInputDialog(null, "A combien voulez-vous zoomer ? ", "Zoom", JOptionPane.QUESTION_MESSAGE);
                 if(sz != null && sz.matches("-?\\d+(\\.\\d+)?")){
-                    z = Integer.parseInt(sz);
+                    z = Long.parseLong(sz);
                     if(z>=mandel.getRatio())
                         isok = true;
                     else{
