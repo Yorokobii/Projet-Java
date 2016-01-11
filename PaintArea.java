@@ -14,9 +14,9 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
     private static Mandelbrot fra;
 
     public PaintArea(){
-        fra = new Mandelbrot(250,300);  // Appel du constructeur avec paramètres de la casse Mandelbrot. Celui donne 250 d'itérations et 300 de zoom de base à la Fractale.
-		addMouseListener(this); // Permet la gestion de la souris dans l'ensemble de la classe
-		addMouseWheelListener(this); // Permet la gestion de la molette dans l'ensemble de la classe
+        fra = new Mandelbrot(250,300);          // Appel du constructeur avec paramètres de la casse Mandelbrot. Celui donne 250 d'itérations et 300 de zoom de base à la Fractale.
+		addMouseListener(this);               // Permet la gestion de la souris dans l'ensemble de la classe
+		addMouseWheelListener(this);          // Permet la gestion de la molette dans l'ensemble de la classe
         fra.colorTab = new Color[3*256];
 
         /*******permet la coloration dégradée******/
