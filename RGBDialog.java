@@ -5,12 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class ZDialog extends JDialog {
+public class RGBDialog extends JDialog {
   private boolean sendData;
   private JLabel rLabel, gLabel, bLabel;
   private JTextField r, g, b;
 
-  public ZDialog(JFrame parent, String title, boolean modal){
+  public RGBDialog(JFrame parent, String title, boolean modal){
     super(parent, title, modal);
     this.setSize(300, 120);
     this.setLocationRelativeTo(null);
@@ -56,7 +56,7 @@ public class ZDialog extends JDialog {
                 int red = Integer.parseInt(r.getText());
                 int green = Integer.parseInt(g.getText());
                 int blue = Integer.parseInt(b.getText());
-                
+
                 if(red<=255 && red>=0 && blue<=255 && blue>=0 && green<=255 && green>=0){
                     mandel.basecolor = new Color(red, green, blue);
                     setVisible(false);

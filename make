@@ -1,1 +1,1 @@
-Principal.java Mandelbrot.java PaintArea.java Window.java ZDialog.java
+Principal.java Mandelbrot.java PaintArea.java Window.java RGBDialog.java

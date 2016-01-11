@@ -48,8 +48,8 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
                 fra.setzr(0);
                 fra.setzi(0);
 
-                fra.setcr( (double)x/ fra.getZoom() + fra.getXPaint() );                    // points c du plan complexe, coordonnée x
-                fra.setci( (double)y/ fra.getZoom() + fra.getYPaint() );                    // coordonnée y de c
+                fra.setcr( (double)x/ fra.getZoom() + fra.getXPaint() );                    // points c du plan complexe, coordonnée x (réelle)
+                fra.setci( (double)y/ fra.getZoom() + fra.getYPaint() );                    // coordonnée y (imaginaire) de c
 
                 int i=0;
                 do{
@@ -60,7 +60,31 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
 
                     ++i;
                 }while( Math.pow( fra.getzr(), 2 ) + Math.pow( fra.getzi(), 2 ) < 4 && i <  fra.getiNumber() );
-                //allumer pixel
+                /*//allumer pixel
+                if(i < fra.getiNumber()){
+                    double red = i*fra.basecolor.getRed()/fra.getiNumber();
+                    double green = i*fra.basecolor.getGreen()/fra.getiNumber();
+                    double blue = i*fra.basecolor.getBlue()/fra.getiNumber();
+                    fra.setColor(new Color((int)red,(int)green,(int)blue));
+                }
+                */
+                /*if(i < ( fra.getiNumber() / 100 * 10)){
+                    //int tmp  = i*255/fra.getiNumber();
+                    //if(tmp<40) tmp=40;
+                    fra.setColor(new Color(255, 255, 255));
+                }
+
+                else if(i < ( fra.getiNumber() / 100 * 20)){
+                    //int tmp  = i*255/fra.getiNumber();
+                    //if(tmp<20) tmp=20;
+                    fra.setColor(new Color(255, tmp, 0));
+                }
+
+                else if(i < ( fra.getiNumber() / 100 * 99)){
+                    //int tmp  = i*255/fra.getiNumber();
+                    //if(tmp<20) tmp=20;
+                    fra.setColor(new Color(102, 204, tmp));
+                }*/
 
                 double modulo = Math.sqrt( Math.pow(fra.getzr(),2) + Math.pow(fra.getzi(),2) );
 

@@ -123,7 +123,7 @@ public class Window extends JFrame implements ActionListener {
             double pointx = Double.parseDouble(jop_point.showInputDialog(null, "Entrez la coordonnée x de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE));
             double pointy = Double.parseDouble(jop_point.showInputDialog(null, "Entrez la coordonnée y de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE));
 
-            
+
             mandel = new Mandelbrot();
             mandel.setXPaint(pointx);
             mandel.setYPaint(pointy);
@@ -165,7 +165,7 @@ public class Window extends JFrame implements ActionListener {
 
     //______ COLOR ________________________________
         if(evenement.getActionCommand().equals("color")){
-            ZDialog dialog = new ZDialog(this, "Color", true);
+            RGBDialog dialog = new RGBDialog(this, "Color", true);
 
             this.repaint();
         }
