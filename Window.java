@@ -1,12 +1,5 @@
-/***
-Commentaires :
-Cette classe génère la fenêtre dans lequel l'affichage sera implenté.
-Les propriétés que la fenêtre doit respecter sont dans les commentaires de la classe Mandelbrot
-
-IHM codée aussi ici :
-- Choisir le nombre d'idérations
-- Zoomer & Dézoomer avec la souris (Gestion de la molette)
-- Si l'on joue avec la taille de la fenêtre la fractale dessinée devra garder proportionnellement la même surface
+/**
+La classe Window génère la fenêtre dans laquelle l'affichage sera implanté.
 */
 
 //* Liste imports :
@@ -14,38 +7,31 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class Window extends JFrame implements ActionListener {
-    public PaintArea area;
-    private Mandelbrot mandel;
+    public PaintArea area;  // Instance de PaintArea
+    private Mandelbrot mandel;  // Instance de Mandelbrot
 
     public Window(String s){
-        super(s);   //Appel du constructeur JFrame en y mettant le nom de la fenêtre
-        setSize(810, 720);  // Taille de la fenêtre à son lancement
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fermeture de la fenêtre
-        setResizable(true); // Fenêtre dont on peut faire varier la taille
-        setLocationRelativeTo(null);  // Fenêtre initialement posée au centre de l'écran
-        setAlwaysOnTop(false);  // La fenêtre n'as pas toujours le focus
+        super(s);                                           // Appel du constructeur JFrame en y mettant le nom de la fenêtre
+        setSize(810, 720);                                  // Taille de la fenêtre à son lancement
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // Fermeture de la fenêtre
+        setResizable(true);                                 // Fenêtre dont on peut faire varier la taille
+        setLocationRelativeTo(null);                        // Fenêtre initialement posée au centre de l'écran
+        setAlwaysOnTop(false);                              // La fenêtre n'as pas toujours le focus
 
-
-	//______ MENU BAR _________________
+        // Création d'une barre des tâches
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-	//_________________________________
 
-
-	//______ MENU TAB _________________
-		JMenu option = new JMenu("Options");
+        // Ajout d'un onglet "Options" à la barre des tâches
+	    JMenu option = new JMenu("Options");
 		menuBar.add(option);
-	//_________________________________
-
-
-	//______ MENU ITEM ________________
 
 		// Création des différents items composant l'onglet Options
         JMenuItem item_iteration = new JMenuItem("Nombre d'itérations");
         JMenuItem item_point = new JMenuItem("Point");
 		JMenuItem item_color = new JMenuItem("Couleur");
 		JMenuItem item_zoom = new JMenuItem("Zoom");
-        JMenuItem item_default = new JMenuItem("Defaut");
+        JMenuItem item_default = new JMenuItem("Réinitialiser");
 		JMenuItem item_exit = new JMenuItem("Quitter");
 
 		// Ajout des items à l'onglet
@@ -53,31 +39,22 @@ public class Window extends JFrame implements ActionListener {
         option.add(item_point);
 		option.add(item_color);
 		option.add(item_zoom);
-		option.add(new JSeparator());
+		option.add(new JSeparator()); // Ajout d'un séparateur entre les différents items
         option.add(item_default);
 		option.add(item_exit);
 
-        // Action effectuée sur item_point
+        // Affectation d'un nom de signal à chaque composant qui est "écouté".
+        // Si un bouton est selecionné alors le signal est déclanché.
         item_point.setActionCommand("point");
         item_point.addActionListener(this);
-
-		// Action effectuée sur item_iteration
 		item_iteration.setActionCommand("iteration");
         item_iteration.addActionListener(this);
-
-        // Action effectuée sur item_color
         item_color.setActionCommand("color");
         item_color.addActionListener(this);
-
-        // Action effectuée sur item_zoom
         item_zoom.setActionCommand("zoom");
         item_zoom.addActionListener(this);
-
-        // Action effectuée sur item_default
         item_default.setActionCommand("default");
         item_default.addActionListener(this);
-
-        // Action effectuée sur item exit
         item_exit.setActionCommand("exit");
         item_exit.addActionListener(this);
 	//_________________________________
@@ -88,9 +65,10 @@ public class Window extends JFrame implements ActionListener {
         setVisible(true); // Affiche la fenêtre
     }
 
+    // Implémentation dans le code obligatoire (implements de l'interface ActionListener)
     public void actionPerformed(ActionEvent evenement){
 
-	//______ EXIT _________________________________
+        // Action effectué sur l'activation du signal "exit"
 		if(evenement.getActionCommand().equals("exit")){
             if( JOptionPane.showConfirmDialog(  null, //< icon
                                                 "Voulez vous vraiment quitter ?", //< Texte
@@ -102,27 +80,27 @@ public class Window extends JFrame implements ActionListener {
         }
 
 
-    //______ ITERATION ___________________________
+        // Action effectuée sur "iteration"
 		if(evenement.getActionCommand().equals("iteration")){
+            // Création d'une fenêtre de dialogue
             JOptionPane jop_iteration = new JOptionPane();
 			String iter = jop_iteration.showInputDialog(null, "Entrez le nombre d'itérations que vous voulez : ", "Iteration Number", JOptionPane.QUESTION_MESSAGE);
 
-            if(iter.matches("-?\\d+(\\.\\d+)?")){ //test si le texte est un nombre
-                mandel = new Mandelbrot();
+            if(iter.matches("-?\\d+(\\.\\d+)?")){ // Test si le texte est un nombre
+                mandel = new Mandelbrot();      // Appel du constructeur sans paramètres de la classe Mandelbrot pour pouvoir modifier ses membres statics
                 int value = Integer.parseInt(iter);
-                mandel.setiNumber(value);
+                mandel.setiNumber(value);   // Modifications du nombre d'itérations dans le programme tout entier, et non uniquement dans cette fonction.
                 System.out.println("Nouveau nombre iterations : "+mandel.getiNumber());
 
-                this.repaint();
+                this.repaint(); // Nécessaire pour redessiner notre fractale.
             }
         }
 
-    //______ POINT _______________________________
+        // Action concernant "point"
         if(evenement.getActionCommand().equals("point")){
             JOptionPane jop_point = new JOptionPane();
             double pointx = Double.parseDouble(jop_point.showInputDialog(null, "Entrez la coordonnée x de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE));
             double pointy = Double.parseDouble(jop_point.showInputDialog(null, "Entrez la coordonnée y de votre point : ", "Point", JOptionPane.QUESTION_MESSAGE));
-
 
             mandel = new Mandelbrot();
             mandel.setXPaint(pointx);
@@ -132,7 +110,7 @@ public class Window extends JFrame implements ActionListener {
             this.repaint();
         }
 
-    //______ DEFAULT _____________________________
+        // Action sur "default"
         if(evenement.getActionCommand().equals("default")){
             mandel = new Mandelbrot(250,300);
             setSize(810,720);
@@ -140,7 +118,7 @@ public class Window extends JFrame implements ActionListener {
             this.repaint();
         }
 
-    //______ ZOOM ________________________________
+        // Action sur "zoom"
         if(evenement.getActionCommand().equals("zoom")){
             mandel = new Mandelbrot();
             JOptionPane jop_point = new JOptionPane();
@@ -162,8 +140,6 @@ public class Window extends JFrame implements ActionListener {
             this.repaint();
         }
 
-
-    //______ COLOR ________________________________
         if(evenement.getActionCommand().equals("color")){
             RGBDialog dialog = new RGBDialog(this, "Color", true);
 

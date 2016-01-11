@@ -9,17 +9,18 @@
 import java.awt.Color;
 
 public class Mandelbrot {
-    //Point à zoomer
-    private static double xPaint;
-    private static double yPaint;
+    // Point à zoomer
+    private static double xPaint;   // Coordonnée x (Partie réelle du nombre complexe à dessiner)
+    private static double yPaint;   // Coordonnée y (Partie imaginaire du nombre complexe à dessiner)
+    // Accesseurs & Mutateurs des
     public double getXPaint() { return xPaint; }
     public double getYPaint() { return yPaint; }
     public void setXPaint(double _xPaint) { xPaint = _xPaint; }
     public void setYPaint(double _yPaint) { yPaint = _yPaint; }
 
-	//Couleur
+	// Couleur
     public static Color basecolor;
-    public Color colorTab [];
+    public Color colorTab []; // Tableau de couleur nécessaire pour le dégradé de couleur (pour la colorisation de la fractale)
     private Color color;
 	public Color getColor() { return color; }
 	public void setColor(Color _color) { color = _color; }
