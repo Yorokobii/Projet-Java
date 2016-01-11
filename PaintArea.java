@@ -60,40 +60,23 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
 
                     ++i;
                 }while( Math.pow( fra.getzr(), 2 ) + Math.pow( fra.getzi(), 2 ) < 4 && i <  fra.getiNumber() );
-                /*//allumer pixel
-                if(i < fra.getiNumber()){
-                    double red = i*fra.basecolor.getRed()/fra.getiNumber();
-                    double green = i*fra.basecolor.getGreen()/fra.getiNumber();
-                    double blue = i*fra.basecolor.getBlue()/fra.getiNumber();
-                    fra.setColor(new Color((int)red,(int)green,(int)blue));
-                }
-                */
-                /*if(i < ( fra.getiNumber() / 100 * 10)){
-                    //int tmp  = i*255/fra.getiNumber();
-                    //if(tmp<40) tmp=40;
-                    fra.setColor(new Color(255, 255, 255));
-                }
-
-                else if(i < ( fra.getiNumber() / 100 * 20)){
-                    //int tmp  = i*255/fra.getiNumber();
-                    //if(tmp<20) tmp=20;
-                    fra.setColor(new Color(255, tmp, 0));
-                }
-
-                else if(i < ( fra.getiNumber() / 100 * 99)){
-                    //int tmp  = i*255/fra.getiNumber();
-                    //if(tmp<20) tmp=20;
-                    fra.setColor(new Color(102, 204, tmp));
-                }*/
 
                 double modulo = Math.sqrt( Math.pow(fra.getzr(),2) + Math.pow(fra.getzi(),2) );
-
+                //allumer pixel
                 if(i < fra.getiNumber() ){
-                    double mu = i - Math.log(Math.log( modulo ))/ Math.log(2);
-                    int colorIndex = (int) ( (mu/fra.getiNumber()) * 768);
-                    if(colorIndex >= 768) colorIndex=0;
-                    if(colorIndex <0) colorIndex = 0;
-                    fra.setColor(fra.colorTab[colorIndex]);
+                    if(fra.multiple_color){
+                        double mu = i - Math.log(Math.log( modulo ))/ Math.log(2);
+                        int colorIndex = (int) ( (mu/fra.getiNumber()) * 768);
+                        if(colorIndex >= 768) colorIndex=0;
+                        if(colorIndex <0) colorIndex = 0;
+                        fra.setColor(fra.colorTab[colorIndex]);
+                    }
+                    else{
+                        double red = i*fra.basecolor.getRed()/fra.getiNumber();
+                        double green = i*fra.basecolor.getGreen()/fra.getiNumber();
+                        double blue = i*fra.basecolor.getBlue()/fra.getiNumber();
+                        fra.setColor(new Color((int)red,(int)green,(int)blue));
+                    }
                 }
                 else
                     fra.setColor(Color.black);

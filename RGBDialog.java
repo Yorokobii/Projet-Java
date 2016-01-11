@@ -9,10 +9,11 @@ public class RGBDialog extends JDialog {
   private boolean sendData;
   private JLabel rLabel, gLabel, bLabel;
   private JTextField r, g, b;
+  private JCheckBox multi_color;
 
   public RGBDialog(JFrame parent, String title, boolean modal){
     super(parent, title, modal);
-    this.setSize(300, 120);
+    this.setSize(300, 170);
     this.setLocationRelativeTo(null);
     this.setResizable(false);
     this.initComponent();
@@ -42,9 +43,15 @@ public class RGBDialog extends JDialog {
     panNom.add(bLabel);
     panNom.add(b);
 
+    JPanel multi_color_pan = new JPanel();
+    multi_color_pan.setBackground(Color.white);
+    multi_color = new JCheckBox("multiple_color", mandel.multiple_color);
+    multi_color_pan.add(multi_color);
+
     JPanel content = new JPanel();
     content.setBackground(Color.white);
     content.add(panNom);
+    content.add(multi_color_pan);
 
     JPanel control = new JPanel();
     control.setBackground(Color.white);
@@ -59,6 +66,7 @@ public class RGBDialog extends JDialog {
 
                 if(red<=255 && red>=0 && blue<=255 && blue>=0 && green<=255 && green>=0){
                     mandel.basecolor = new Color(red, green, blue);
+                    mandel.multiple_color = multi_color.isSelected();
                     setVisible(false);
                 }
             }
