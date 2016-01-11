@@ -17,6 +17,25 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
         fra = new Mandelbrot(250,300);  // Appel du constructeur avec paramètres de la casse Mandelbrot. Celui donne 250 d'itérations et 300 de zoom de base à la Fractale.
 		addMouseListener(this); // Permet la gestion de la souris dans l'ensemble de la classe
 		addMouseWheelListener(this); // Permet la gestion de la molette dans l'ensemble de la classe
+        fra.colorTab = new Color[3*256];
+
+        for(int i=0; i<(3*256); ++i){
+            int red=0;
+            int green=0;
+            int blue=0;
+
+            if(i >= 512){
+                red = i - 512;
+                green = 255 - red;
+            }
+            else if(i >= 256){
+                green = i-256;
+                blue = 255 - green;
+            }
+            else blue = i;
+
+            fra.colorTab[i] = new Color(red, green, blue);
+        }
 	}
 
     public void paint(Graphics g){
@@ -41,47 +60,20 @@ public class PaintArea extends JPanel implements MouseListener, MouseWheelListen
 
                     ++i;
                 }while( Math.pow( fra.getzr(), 2 ) + Math.pow( fra.getzi(), 2 ) < 4 && i <  fra.getiNumber() );
+                //allumer pixel
 
-                /*//allumer pixel
-                if(i < fra.getiNumber()){
-                    double red = i*fra.basecolor.getRed()/fra.getiNumber();
-                    double green = i*fra.basecolor.getGreen()/fra.getiNumber();
-                    double blue = i*fra.basecolor.getBlue()/fra.getiNumber();
-                    fra.setColor(new Color((int)red,(int)green,(int)blue));
-                }
-                */
-                if(i < ( fra.getiNumber() / 100 * 20)){
-                    int tmp  = i*255/fra.getiNumber();
-                    //if(tmp<40) tmp=40;
-                    fra.setColor(new Color(tmp, 255, 255));
-                }
+                double modulo = Math.sqrt( Math.pow(fra.getzr(),2) + Math.pow(fra.getzi(),2) );
 
-                else if(i < ( fra.getiNumber() / 100 * 40)){
-                    int tmp  = i*255/fra.getiNumber();
-                    //if(tmp<20) tmp=20;
-                    fra.setColor(new Color(255, tmp, 0));
+                if(i < fra.getiNumber() ){
+                    double mu = i - Math.log(Math.log( modulo ))/ Math.log(2);
+                    int colorIndex = (int) ( (mu/fra.getiNumber()) * 768);
+                    if(colorIndex >= 768) colorIndex=0;
+                    if(colorIndex <0) colorIndex = 0;
+                    fra.setColor(fra.colorTab[colorIndex]);
                 }
+                else
+                    fra.setColor(Color.black);
 
-                else if(i < ( fra.getiNumber() / 100 * 60)){
-                    int tmp  = i*255/fra.getiNumber();
-                    //if(tmp<20) tmp=20;
-                    fra.setColor(new Color(0, 255, tmp));
-                }
-
-                else if(i < ( fra.getiNumber() / 100 * 80)){
-                    int tmp  = i*255/fra.getiNumber();
-                    //if(tmp<20) tmp=20;
-                    fra.setColor(new Color(255, 255, tmp));
-                }
-
-                else if(i < ( fra.getiNumber() / 100 * 99)){
-                    int tmp  = i*255/fra.getiNumber();
-                    //if(tmp<20) tmp=20;
-                    fra.setColor(new Color(0, 0, tmp));
-                }
-
-				else
-					fra.setColor(Color.black);
 				g.setColor(fra.getColor());
 				g.drawLine(x+this.getSize().width/2,-y+this.getSize().height/2,x+this.getSize().width/2,-y+this.getSize().height/2);
             }
