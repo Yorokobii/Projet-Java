@@ -18,15 +18,15 @@ import java.awt.Color;
 
 public class Mandelbrot {
     // Bornes de dessin de la fractale
-    private final double xOne = -2.1;
+    /*private final double xOne = -2.1;
     private final double xTwo = 0.6;
     private final double yOne = -1.2;
-    private final double yTwo = 1.2;
+    private final double yTwo = 1.2;*/
 
-    public final double getxo() { return xOne; }
+    /*public final double getxo() { return xOne; }
     public final double getxt() { return xTwo; }
     public final double getyo() { return yOne; }
-    public final double getyt() { return yTwo; }
+    public final double getyt() { return yTwo; } */
 
     //Point à zoomer
     private static double xPaint;
@@ -38,7 +38,9 @@ public class Mandelbrot {
     public void setYPaint(final double _yPaint) { yPaint = _yPaint; }
 
 	//Couleur
-	private Color color;
+    public static Color basecolor;
+
+    private Color color;
 
 	public Color getColor() { return color; }
 	public void setColor(Color _color) { color = _color; }
@@ -56,9 +58,9 @@ public class Mandelbrot {
     public int getiNumber() { return iterMax; }
     public void setiNumber(int i) { iterMax = i; }
 
-    // Hauteur & Largeur
+    /*// Hauteur & Largeur
     public double getWidth() { return (xTwo - xOne)* zoom; }
-    public double getHeight() { return (yTwo - yOne)* zoom; }
+    public double getHeight() { return (yTwo - yOne)* zoom; } */
 
     // z & c Real & Imaginary
     private double zReal;
@@ -87,6 +89,4 @@ public class Mandelbrot {
 
     // Constructeur sans paramètres
     public Mandelbrot() { }
-
-    public static Color basecolor;
 }

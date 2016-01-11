@@ -3,3 +3,4 @@ public class Principal {
         Window w = new Window("Fractale de Mandelbrot");
     }
 }
+    x
